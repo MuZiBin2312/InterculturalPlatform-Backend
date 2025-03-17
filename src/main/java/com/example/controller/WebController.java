@@ -39,6 +39,7 @@ public class WebController {
     @Resource
     AnswerService answerService;
 
+
     @GetMapping("/")
     public Result hello() {
         return Result.success("访问成功");

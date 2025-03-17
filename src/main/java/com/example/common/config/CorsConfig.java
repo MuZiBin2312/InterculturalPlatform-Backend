@@ -18,6 +18,7 @@ public class CorsConfig {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
 
         // 允许本地开发地址和外网地址
+        corsConfiguration.addAllowedOrigin("http://192.168.18.15:8080");  // 本地开发地址
         corsConfiguration.addAllowedOrigin("http://localhost:8080");  // 本地开发地址
         corsConfiguration.addAllowedOrigin("https://550295mjyq84.vicp.fun");  // 外网地址
 
