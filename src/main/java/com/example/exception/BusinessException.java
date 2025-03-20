@@ -28,7 +28,7 @@ public class BusinessException extends RuntimeException {
     private static final String orderNo = "19008158479571927048";
     private static final String type = "CODE";
 
-    @PostConstruct
+//    @PostConstruct
     public void init() {
         try {
             String machineCode = getMachineCode();
