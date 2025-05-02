@@ -42,7 +42,7 @@
             <if test="file != null">file,</if>
             <if test="time != null">time,</if>
             <if test="readCount != null">read_count,</if>
-            <if test="author != null">user_id,</if>
+            <if test="userId != null">user_id,</if>
 
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -51,7 +51,7 @@
             <if test="file != null">#{file},</if>
             <if test="time != null">#{time},</if>
             <if test="readCount != null">#{readCount},</if>
-            <if test="author != null">#{userId},</if>
+            <if test="userId != null">#{userId},</if>
 
         </trim>
     </insert>
