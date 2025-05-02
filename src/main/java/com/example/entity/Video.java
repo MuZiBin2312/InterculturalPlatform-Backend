@@ -19,6 +19,17 @@ public class Video implements Serializable {
     /** 播放次数 */
     private Integer readCount;
 
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    private Integer userId;
+
+
     public Integer getId() {
         return id;
     }

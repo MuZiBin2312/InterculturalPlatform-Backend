@@ -5,7 +5,7 @@
 <mapper namespace="com.example.mapper.VideoMapper">
 
     <sql id="Base_Column_List">
-        id,name,file,time,read_count
+        id,name,file,time,read_count,user_id
     </sql>
 
     <select id="selectAll" resultType="com.example.entity.Video">
@@ -42,6 +42,8 @@
             <if test="file != null">file,</if>
             <if test="time != null">time,</if>
             <if test="readCount != null">read_count,</if>
+            <if test="author != null">user_id,</if>
+
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">#{id},</if>
@@ -49,6 +51,8 @@
             <if test="file != null">#{file},</if>
             <if test="time != null">#{time},</if>
             <if test="readCount != null">#{readCount},</if>
+            <if test="author != null">#{userId},</if>
+
         </trim>
     </insert>
 
