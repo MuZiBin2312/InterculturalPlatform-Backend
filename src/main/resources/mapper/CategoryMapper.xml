@@ -5,7 +5,7 @@
 <mapper namespace="com.example.mapper.CategoryMapper">
 
     <sql id="Base_Column_List">
-        id,name
+        id, name, father
     </sql>
 
     <select id="selectAll" resultType="com.example.entity.Category">
@@ -28,7 +28,7 @@
 
     <delete id="deleteById">
         delete from category
-        where  id = #{id}
+        where id = #{id}
     </delete>
 
     <insert id="insert" parameterType="com.example.entity.Category" useGeneratedKeys="true" keyProperty="id">
@@ -36,10 +36,12 @@
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">id,</if>
             <if test="name != null">name,</if>
+            <if test="father != null">father,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">#{id},</if>
             <if test="name != null">#{name},</if>
+            <if test="father != null">#{father},</if>
         </trim>
     </insert>
 
@@ -48,6 +50,9 @@
         <set>
             <if test="name != null">
                 name = #{name},
+            </if>
+            <if test="father != null">
+                father = #{father},
             </if>
         </set>
         where id = #{id}

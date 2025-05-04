@@ -13,6 +13,16 @@ public class Category implements Serializable {
     /** 分类名称 */
     private String name;
 
+    private String father;
+
+    public String getFather() {
+        return father;
+    }
+
+    public void setFather(String father) {
+        this.father = father;
+    }
+
     public Integer getId() {
         return id;
     }
