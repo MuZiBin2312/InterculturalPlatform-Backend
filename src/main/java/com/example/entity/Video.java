@@ -19,6 +19,16 @@ public class Video implements Serializable {
     /** 播放次数 */
     private Integer readCount;
 
+    private String category;
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
     public Integer getUserId() {
         return userId;
     }

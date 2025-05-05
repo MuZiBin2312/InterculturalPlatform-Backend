@@ -5,7 +5,7 @@
 <mapper namespace="com.example.mapper.VideoMapper">
 
     <sql id="Base_Column_List">
-        id,name,file,time,read_count,user_id
+        id,name,file,time,read_count,user_id,category
     </sql>
 
     <select id="selectAll" resultType="com.example.entity.Video">
@@ -18,6 +18,7 @@
             <if test="file != null"> and file like concat('%', #{file}, '%')</if>
             <if test="time != null"> and time like concat('%', #{time}, '%')</if>
             <if test="readCount != null"> and read_count = #{readCount}</if>
+            <if test="category != null"> and category like concat('%', #{category}, '%')</if>
         </where>
         order by id desc
     </select>
@@ -31,7 +32,7 @@
 
     <delete id="deleteById">
         delete from video
-        where  id = #{id}
+        where id = #{id}
     </delete>
 
     <insert id="insert" parameterType="com.example.entity.Video" useGeneratedKeys="true" keyProperty="id">
@@ -43,7 +44,7 @@
             <if test="time != null">time,</if>
             <if test="readCount != null">read_count,</if>
             <if test="userId != null">user_id,</if>
-
+            <if test="category != null">category,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">#{id},</if>
@@ -52,7 +53,7 @@
             <if test="time != null">#{time},</if>
             <if test="readCount != null">#{readCount},</if>
             <if test="userId != null">#{userId},</if>
-
+            <if test="category != null">#{category},</if>
         </trim>
     </insert>
 
@@ -70,6 +71,9 @@
             </if>
             <if test="readCount != null">
                 read_count = #{readCount},
+            </if>
+            <if test="category != null">
+                category = #{category},
             </if>
         </set>
         where id = #{id}
