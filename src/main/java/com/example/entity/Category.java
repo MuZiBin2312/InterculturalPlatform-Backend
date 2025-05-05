@@ -15,6 +15,16 @@ public class Category implements Serializable {
 
     private String father;
 
+    private String icon;
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+
     public String getFather() {
         return father;
     }
