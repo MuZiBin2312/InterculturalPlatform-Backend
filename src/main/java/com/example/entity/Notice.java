@@ -18,6 +18,15 @@ public class Notice implements Serializable {
     private String time;
     /** 创建人 */
     private String user;
+    private Integer category;
+
+    public Integer getCategory() {
+        return category;
+    }
+
+    public void setCategory(Integer category) {
+        this.category = category;
+    }
 
     public Integer getId() {
         return id;
