@@ -72,6 +72,7 @@ public class NoticeController {
         return Result.success(list);
     }
 
+
     /**
      * 分页查询
      */
