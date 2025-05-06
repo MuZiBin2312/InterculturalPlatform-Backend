@@ -5,7 +5,7 @@
 <mapper namespace="com.example.mapper.QuestionMapper">
 
     <sql id="Base_Column_List">
-        id,title,descr,img,user_id,date,read_count,status
+        id,title,descr,img,user_id,date,read_count,status,category
     </sql>
 
     <select id="selectAll" resultType="com.example.entity.Question">
@@ -17,6 +17,7 @@
             <if test="title != null"> and question.title like concat('%', #{title}, '%')</if>
             <if test="userId != null"> and question.user_id = #{userId}</if>
             <if test="status != null"> and question.status like concat('%', #{status}, '%')</if>
+            <if test="category != null"> and question.category = #{category}</if>
         </where>
         order by question.id desc
     </select>
@@ -36,22 +37,24 @@
         <where>
             question.status = '通过'
             <if test="userId != null"> and question.user_id = #{userId}</if>
+            <if test="category != null"> and question.category = #{category}</if>
         </where>
         order by question.read_count desc
     </select>
 
     <select id="selectNoAnswer" resultType="com.example.entity.Question">
         select
-            question.*
+        question.*
         from question
         left join answer
         on question.id = answer.question_id
         where question.status = '通过' and answer.id is null
+        <if test="category != null"> and question.category = #{category}</if>
     </select>
 
     <delete id="deleteById">
         delete from question
-        where  id = #{id}
+        where id = #{id}
     </delete>
 
     <insert id="insert" parameterType="com.example.entity.Question" useGeneratedKeys="true" keyProperty="id">
@@ -65,6 +68,7 @@
             <if test="date != null">date,</if>
             <if test="readCount != null">read_count,</if>
             <if test="status != null">status,</if>
+            <if test="category != null">category,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">#{id},</if>
@@ -75,33 +79,21 @@
             <if test="date != null">#{date},</if>
             <if test="readCount != null">#{readCount},</if>
             <if test="status != null">#{status},</if>
+            <if test="category != null">#{category},</if>
         </trim>
     </insert>
 
     <update id="updateById" parameterType="com.example.entity.Question">
         update question
         <set>
-            <if test="title != null">
-                title = #{title},
-            </if>
-            <if test="descr != null">
-                descr = #{descr},
-            </if>
-            <if test="img != null">
-                img = #{img},
-            </if>
-            <if test="userId != null">
-                user_id = #{userId},
-            </if>
-            <if test="date != null">
-                date = #{date},
-            </if>
-            <if test="readCount != null">
-                read_count = #{readCount},
-            </if>
-            <if test="status != null">
-                status = #{status},
-            </if>
+            <if test="title != null">title = #{title},</if>
+            <if test="descr != null">descr = #{descr},</if>
+            <if test="img != null">img = #{img},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="date != null">date = #{date},</if>
+            <if test="readCount != null">read_count = #{readCount},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="category != null">category = #{category},</if>
         </set>
         where id = #{id}
     </update>
