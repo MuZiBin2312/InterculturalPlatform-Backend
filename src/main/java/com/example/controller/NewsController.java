@@ -114,4 +114,12 @@ public class NewsController {
         return Result.success(page);
     }
 
+
+    @GetMapping("/selectAllPage")
+    public Result selectAllPassedPage(News news,
+                                      @RequestParam(defaultValue = "1") Integer pageNum,
+                                      @RequestParam(defaultValue = "10") Integer pageSize) {
+        PageInfo<News> page = newsService.selectAllPage(news, pageNum, pageSize);
+        return Result.success(page);
+    }
 }
