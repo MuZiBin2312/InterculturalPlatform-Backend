@@ -70,4 +70,8 @@ public class CategoryService {
         return PageInfo.of(list);
     }
 
+    public List<Category> findAll() {
+        return categoryMapper.selectAll(null); // 参数可以传 null 表示查询全部
+    }
+
 }
