@@ -27,6 +27,16 @@ public class Comment {
     private String avatar;
     private String parentUserName;
 
+    private String role;
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     public String getParentUserName() {
         return parentUserName;
     }
