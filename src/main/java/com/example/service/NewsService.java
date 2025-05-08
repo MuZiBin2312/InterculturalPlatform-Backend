@@ -137,10 +137,10 @@ public class NewsService {
     /**
      * 分页查询所有“通过”的新闻（不限制类型）
      */
-    public PageInfo<News> selectAllPage(News news, Integer pageNum, Integer pageSize) {
+    public PageInfo<News> selectAllPage(News news) {
         news.setStatus("通过");  // 只查通过审核的
         news.setType(null);      // 不限定类型，local 和 common 都能查到
-        PageHelper.startPage(pageNum, pageSize);
+//        PageHelper.startPage(pageNum, pageSize);
         List<News> list = newsMapper.selectAll(news);
         for (News n : list) {
             Integer count = commentService.selectCount(n.getId(), "news");
