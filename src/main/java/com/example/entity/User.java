@@ -97,7 +97,7 @@ public class User extends Account implements Serializable {
     }
 
     @Override
-    public void setRole(String role) {
+    public void setRole( String role) {
         this.role = role;
     }
 }

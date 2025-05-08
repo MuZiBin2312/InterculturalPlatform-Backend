@@ -10,13 +10,30 @@
 
     <select id="selectAll" resultType="com.example.entity.Answer">
         select
-        answer.*, question.title questionTitle, user.name as userName
+        answer.*, question.title questionTitle,
+        user.name as userName,
+        user.role as userRole
         from answer
         left join question on answer.question_id = question.id
         left join user on answer.user_id = user.id
         <where>
             <if test="content != null"> and answer.content like concat('%', #{content}, '%')</if>
             <if test="userId != null"> and answer.user_id = #{userId}</if>
+        </where>
+        order by answer.id desc
+    </select>
+
+    <select id="selectFrontPage" resultType="com.example.entity.Answer">
+        select
+        answer.*, question.title questionTitle,
+        user.name as userName,
+        user.avatar as userAvatar,
+        user.role as userRole
+        from answer
+        left join question on answer.question_id = question.id
+        left join user on answer.user_id = user.id
+        <where>
+            answer.status = '通过' and answer.question_id = #{questionId}
         </where>
         order by answer.id desc
     </select>
@@ -28,17 +45,6 @@
         where id = #{id}
     </select>
 
-    <select id="selectFrontPage" resultType="com.example.entity.Answer">
-        select
-        answer.*, question.title questionTitle, user.name as userName, user.avatar as userAvatar
-        from answer
-        left join question on answer.question_id = question.id
-        left join user on answer.user_id = user.id
-        <where>
-            answer.status = '通过' and answer.question_id = #{questionId}
-        </where>
-        order by answer.id desc
-    </select>
 
     <delete id="deleteById">
         delete from answer

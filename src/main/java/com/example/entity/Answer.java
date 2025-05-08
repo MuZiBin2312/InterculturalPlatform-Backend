@@ -24,6 +24,15 @@ public class Answer implements Serializable {
     private String userAvatar;
     private Boolean likes;
     private Integer likesCount;
+    private String userRole; // 对应 SQL 中的 user.role as userRole
+
+    public String getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(String userRole) {
+        this.userRole = userRole;
+    }
 
     public Boolean getLikes() {
         return likes;

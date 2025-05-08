@@ -136,20 +136,18 @@ public class WebController {
 
     @GetMapping("/selectPie")
     public Result selectPie() {
-// 1. 查询所有目录信息，构建 id -> name 的映射
+        // 1. 查询所有目录信息，构建 id -> name 的映射
         List<Category> categoryList = categoryService.findAll();
         Map<Integer, String> categoryMap = categoryList.stream()
                 .collect(Collectors.toMap(Category::getId, Category::getName));
-// 2. 获取资讯数据并过滤类型为 "common"
-        List<News> newsList = newsService.selectAll(null);
-        newsList = newsList.stream()
-                .filter(news -> "common".equals(news.getType()))
-                .collect(Collectors.toList());
 
-// 3. 统计每个目录ID出现的次数
+        // 2. 获取所有资讯数据
+        List<News> newsList = newsService.selectAll(null);
+
+        // 3. 统计每个目录ID出现的次数
         Map<Integer, Long> countMap = newsList.stream()
                 .collect(Collectors.groupingBy(news -> Integer.valueOf(news.getCategory()), Collectors.counting()));
-// 4. 把目录ID和对应名称组装为最终结果
+        // 4. 把目录ID和对应名称组装为最终结果
         List<Dict> list = new ArrayList<>();
         for (Map.Entry<Integer, Long> entry : countMap.entrySet()) {
             Integer id = entry.getKey();
@@ -162,7 +160,6 @@ public class WebController {
 
         return Result.success(list);
     }
-
     @GetMapping("/selectTrendData")
     public Result selectTrendData() {
         List<News> newsList = newsService.selectAll(null);
