@@ -83,8 +83,8 @@ public class VideoController {
      */
     @GetMapping("/selectPage")
     public Result selectPage(Video video,
-                             @RequestParam(defaultValue = "1") Integer pageNum,
-                             @RequestParam(defaultValue = "10") Integer pageSize) {
+                             @RequestParam Integer pageNum,
+                             @RequestParam Integer pageSize) {
         PageInfo<Video> page = videoService.selectPage(video, pageNum, pageSize);
         return Result.success(page);
     }

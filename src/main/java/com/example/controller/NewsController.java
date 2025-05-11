@@ -83,16 +83,16 @@ public class NewsController {
      */
     @GetMapping("/selectPage")
     public Result selectPage(News news,
-                             @RequestParam(defaultValue = "1") Integer pageNum,
-                             @RequestParam(defaultValue = "10") Integer pageSize) {
+                             @RequestParam Integer pageNum,
+                             @RequestParam Integer pageSize) {
         PageInfo<News> page = newsService.selectPage(news, pageNum, pageSize);
         return Result.success(page);
     }
 
     @GetMapping("/selectFrontPage")
     public Result selectFrontPage(News news,
-                             @RequestParam(defaultValue = "1") Integer pageNum,
-                             @RequestParam(defaultValue = "10") Integer pageSize) {
+                             @RequestParam Integer pageNum,
+                             @RequestParam Integer pageSize) {
         PageInfo<News> page = newsService.selectFrontPage(news, pageNum, pageSize);
         return Result.success(page);
     }
@@ -108,8 +108,8 @@ public class NewsController {
      */
     @GetMapping("/selectLocalPage")
     public Result selectLocalPage(News news,
-                             @RequestParam(defaultValue = "1") Integer pageNum,
-                             @RequestParam(defaultValue = "10") Integer pageSize) {
+                             @RequestParam Integer pageNum,
+                             @RequestParam Integer pageSize) {
         PageInfo<News> page = newsService.selectLocalPage(news, pageNum, pageSize);
         return Result.success(page);
     }
