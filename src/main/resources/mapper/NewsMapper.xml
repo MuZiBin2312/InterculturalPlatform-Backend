@@ -15,8 +15,6 @@
         <where>
             <if test="title != null"> and title like concat('%', #{title}, '%')</if>
             <if test="category != null"> and category =  #{category}</if>
-#             <if test="category != null"> and category like concat('%', #{category}, '%')</if>
-
             <if test="type != null"> and type like concat('%', #{type}, '%')</if>
             <if test="userId != null"> and user_id = #{userId}</if>
             <if test="status != null"> and status like concat('%', #{status}, '%')</if>
