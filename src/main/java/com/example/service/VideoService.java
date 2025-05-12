@@ -68,9 +68,11 @@ public class VideoService {
      */
     public PageInfo<Video> selectPage(Video video, Integer pageNum, Integer pageSize, Integer userId) {
         PageHelper.startPage(pageNum, pageSize);
-        System.out.println("用户id"+userId);
+        System.out.println("用户id"+userId+"class:"+userId.getClass());
         if (userId != -1) {
             video.setUserId(userId); // 假设 Video 类中有 userId 字段及其 setter 方法
+        }else {
+            video.setUserId(null);
         }
 
         List<Video> list = videoMapper.selectAll(video);
