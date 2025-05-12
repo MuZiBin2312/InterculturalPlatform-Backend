@@ -17,6 +17,7 @@
             <if test="name != null"> and name like concat('%', #{name}, '%')</if>
             <if test="file != null"> and file like concat('%', #{file}, '%')</if>
             <if test="time != null"> and time like concat('%', #{time}, '%')</if>
+            <if test="userId != null"> and user_id = #{userId} </if>
             <if test="readCount != null"> and read_count = #{readCount}</if>
             <if test="category != null"> and category like concat('%', #{category}, '%')</if>
         </where>

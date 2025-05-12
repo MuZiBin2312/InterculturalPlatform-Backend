@@ -66,8 +66,13 @@ public class VideoService {
     /**
      * 分页查询
      */
-    public PageInfo<Video> selectPage(Video video, Integer pageNum, Integer pageSize) {
+    public PageInfo<Video> selectPage(Video video, Integer pageNum, Integer pageSize, Integer userId) {
         PageHelper.startPage(pageNum, pageSize);
+
+        if (userId != null) {
+            video.setUserId(userId); // 假设 Video 类中有 userId 字段及其 setter 方法
+        }
+
         List<Video> list = videoMapper.selectAll(video);
         return PageInfo.of(list);
     }

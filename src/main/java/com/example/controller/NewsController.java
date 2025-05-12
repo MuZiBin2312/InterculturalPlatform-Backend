@@ -83,9 +83,10 @@ public class NewsController {
      */
     @GetMapping("/selectPage")
     public Result selectPage(News news,
-                             @RequestParam Integer pageNum,
-                             @RequestParam Integer pageSize) {
-        PageInfo<News> page = newsService.selectPage(news, pageNum, pageSize);
+                             @RequestParam(defaultValue = "1") Integer pageNum,
+                             @RequestParam Integer userId,
+                             @RequestParam(defaultValue = "10") Integer pageSize) {
+        PageInfo<News> page = newsService.selectPage(news, pageNum, pageSize,userId);
         return Result.success(page);
     }
 

@@ -8,18 +8,28 @@
         id,title,descr,category,content,img,time,read_count,type,user_id,status
     </sql>
 
-    <select id="selectAll" resultType="com.example.entity.News">
-        select
+    <select id="selectAll" parameterType="com.example.entity.News" resultType="com.example.entity.News">
+        SELECT
         <include refid="Base_Column_List" />
-        from news
+        FROM news
         <where>
-            <if test="title != null"> and title like concat('%', #{title}, '%')</if>
-            <if test="category != null"> and category =  #{category}</if>
-            <if test="type != null"> and type like concat('%', #{type}, '%')</if>
-            <if test="userId != null"> and user_id = #{userId}</if>
-            <if test="status != null"> and status like concat('%', #{status}, '%')</if>
+            <if test="title != null and title != ''">
+                AND title LIKE CONCAT('%', #{title}, '%')
+            </if>
+            <if test="category != null and category != ''">
+                AND category = #{category}
+            </if>
+            <if test="type != null and type != ''">
+                AND type LIKE CONCAT('%', #{type}, '%')
+            </if>
+            <if test="userId != null">
+                AND user_id = #{userId}
+            </if>
+            <if test="status != null and status != ''">
+                AND status LIKE CONCAT('%', #{status}, '%')
+            </if>
         </where>
-        order by id desc
+        ORDER BY id DESC
     </select>
 
     <select id="selectById" resultType="com.example.entity.News">

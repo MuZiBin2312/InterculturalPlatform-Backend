@@ -8,11 +8,14 @@ import com.example.mapper.NewsMapper;
 import com.example.utils.TokenUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+
 import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -83,18 +86,30 @@ public class NewsService {
     /**
      * 分页查询
      */
-    public PageInfo<News> selectPage(News news, Integer pageNum, Integer pageSize) {
+    public PageInfo<News> selectPage(News news, Integer pageNum, Integer pageSize, Integer userId) {
         Account currentUser = TokenUtils.getCurrentUser();
         if (RoleEnum.USER.name().equals(currentUser.getRole())) {
             news.setType("local");
-            news.setUserId(currentUser.getId());
+//            news.setUserId(currentUser.getId());
         }
+        String cRole = currentUser.getRole();
+        if (Objects.equals(cRole, "TEACHER")) {
+            System.out.println("userid!!!!!!::" + currentUser.getRole());
+
+            news.setUserId(userId);
+        }else {
+            news.setUserId(null);
+
+        }
+
         PageHelper.startPage(pageNum, pageSize);
         List<News> list = newsMapper.selectAll(news);
+
         for (News n : list) {
             Integer count = commentService.selectCount(n.getId(), "news");
             n.setCommentCount(count);
         }
+
         return PageInfo.of(list);
     }
 
@@ -112,7 +127,7 @@ public class NewsService {
 
     public List<News> selectHot() {
         List<News> newsList = newsMapper.selectAll(null);
-        newsList = newsList.stream().sorted((n1,n2) -> n2.getReadCount() - n1.getReadCount()).limit(20).collect(Collectors.toList());
+        newsList = newsList.stream().sorted((n1, n2) -> n2.getReadCount() - n1.getReadCount()).limit(20).collect(Collectors.toList());
         Collections.shuffle(newsList);  // 打乱数据
         newsList = newsList.stream().limit(8).collect(Collectors.toList());
         return newsList;
