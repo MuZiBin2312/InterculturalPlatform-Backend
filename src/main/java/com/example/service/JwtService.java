@@ -103,7 +103,7 @@ FckiHnAAeMcEnPV/ZI/A/EjzFueim+K5FFQU1pBKrQrDGq/nI0ZOM1oity3D361Y
     // 校验 Token 是否有效
     public boolean isTokenValid(String token) {
         try {
-            Jwts.parserBuilder()
+            Jwts.parser()
                     .setSigningKey(getPublicKey())
                     .build()
                     .parseClaimsJws(token);
