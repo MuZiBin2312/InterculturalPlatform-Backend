@@ -77,6 +77,8 @@ public class QuestionService {
         if (RoleEnum.USER.name().equals(currentUser.getRole()) ||
                 RoleEnum.TEACHER.name().equals(currentUser.getRole())) {
             question.setUserId(currentUser.getId());
+        }else {
+            question.setUserId(null);
         }
 
         PageHelper.startPage(pageNum, pageSize);

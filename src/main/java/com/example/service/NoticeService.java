@@ -80,8 +80,8 @@ public class NoticeService {
         String cRole = currentUser.getRole();
 
         if (Objects.equals(cRole, "TEACHER")) {
-            System.out.println("this user is"+userId);
-                System.out.println("username!!!!!!::" + currentUser.getUsername());
+//            System.out.println("this user is"+userId);
+//                System.out.println("username!!!!!!::" + currentUser.getUsername());
 
 
             notice.setUser(String.valueOf(currentUser.getUsername()));

@@ -79,7 +79,7 @@ public class NoticeController {
     @GetMapping("/selectPage")
     public Result selectPage(Notice notice,
                              @RequestParam(defaultValue = "1") Integer pageNum,
-                             @RequestParam Integer userId,
+                             @RequestParam(defaultValue = "-1") Integer userId,
 
                              @RequestParam(defaultValue = "10") Integer pageSize) {
         PageInfo<Notice> page = noticeService.selectPage(notice, pageNum, pageSize,userId);
