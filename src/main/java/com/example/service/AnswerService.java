@@ -83,7 +83,8 @@ public class AnswerService {
      */
     public PageInfo<Answer> selectPage(Answer answer, Integer pageNum, Integer pageSize) {
         Account currentUser = TokenUtils.getCurrentUser();
-        if (RoleEnum.USER.name().equals(currentUser.getRole())) {
+        if (RoleEnum.USER.name().equals(currentUser.getRole()) ||
+                RoleEnum.TEACHER.name().equals(currentUser.getRole())) {
             answer.setUserId(currentUser.getId());
         }
         PageHelper.startPage(pageNum, pageSize);
