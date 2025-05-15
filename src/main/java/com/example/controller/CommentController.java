@@ -1,6 +1,7 @@
 package com.example.controller;
 
 import com.example.common.Result;
+import com.example.dto.CommentDTO;
 import com.example.entity.Comment;
 import com.example.service.CommentService;
 import com.github.pagehelper.PageInfo;
@@ -89,6 +90,13 @@ public class CommentController {
                              @RequestParam(defaultValue = "1") Integer pageNum,
                              @RequestParam(defaultValue = "10") Integer pageSize) {
         PageInfo<Comment> page = commentService.selectPage(comment, pageNum, pageSize);
+        return Result.success(page);
+    }
+    @GetMapping("/selectPageWithNews")
+    public Result selectPageWithNews(Comment comment,
+                                     @RequestParam(defaultValue = "1") Integer pageNum,
+                                     @RequestParam(defaultValue = "10") Integer pageSize) {
+        PageInfo<CommentDTO> page = commentService.selectPageWithNewsAndCategory(comment, pageNum, pageSize);
         return Result.success(page);
     }
 

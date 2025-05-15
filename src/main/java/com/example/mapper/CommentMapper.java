@@ -1,5 +1,6 @@
 package com.example.mapper;
 
+import com.example.dto.CommentDTO;
 import com.example.entity.Comment;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -45,4 +46,6 @@ public interface CommentMapper {
 
     @Select("select * from comment where pid = #{pid}")
     List<Comment> selectByPid(Integer pid);
+    List<CommentDTO> selectAllWithNewsAndCategory(Comment comment);
+
 }

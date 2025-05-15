@@ -1,6 +1,7 @@
 package com.example.service;
 
 import cn.hutool.core.date.DateUtil;
+import com.example.dto.CommentDTO;
 import com.example.entity.Comment;
 import com.example.mapper.CommentMapper;
 import com.github.pagehelper.PageHelper;
@@ -93,6 +94,12 @@ public class CommentService {
         List<Comment> list = commentMapper.selectAll(comment);
         return PageInfo.of(list);
     }
+    public PageInfo<CommentDTO> selectPageWithNewsAndCategory(Comment comment, Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<CommentDTO> list = commentMapper.selectAllWithNewsAndCategory(comment);
+        return PageInfo.of(list);
+    }
+
 
     public PageInfo<Comment> selectTree(Integer fid, String module, Integer pageNum, Integer pageSize) {
         PageHelper.startPage(pageNum, pageSize);

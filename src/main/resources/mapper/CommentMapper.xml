@@ -107,5 +107,42 @@
         </set>
         where id = #{id}
     </update>
+    <select id="selectAllWithNewsAndCategory" resultType="com.example.dto.CommentDTO">
+        select
+        c.id,
+        c.content,
+        c.user_id as userId,
+        c.pid,
+        c.time,
+        c.fid,
+        c.module,
+        c.root_id as rootId,
+
+        u.name as userName,
+        u.avatar,
+        u.role,
+        u2.name as parentUserName,
+
+        n.id as newsId,
+        n.title,
+        n.descr,
+        cat2.name as category,          -- 二级分类名
+        cat1.name as topCategoryName   -- 一级分类名
+
+        from comment c
+        left join user u on c.user_id = u.id
+        left join comment c2 on c.pid = c2.id
+        left join user u2 on c2.user_id = u2.id
+        left join news n on c.fid = n.id
+        left join category cat2 on n.category = cat2.id       -- 二级分类
+        left join category cat1 on cat2.father = cat1.id      -- 一级分类（通过father字段）
+
+        <where>
+            <if test="content != null"> and c.content like concat('%', #{content}, '%')</if>
+        </where>
+
+        order by c.id desc
+    </select>
+
 
 </mapper>
