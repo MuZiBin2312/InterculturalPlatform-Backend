@@ -74,9 +74,11 @@ public class QuestionService {
      */
     public PageInfo<Question> selectPage(Question question, Integer pageNum, Integer pageSize) {
         Account currentUser = TokenUtils.getCurrentUser();
-        if (RoleEnum.USER.name().equals(currentUser.getRole())) {
+        if (RoleEnum.USER.name().equals(currentUser.getRole()) ||
+                RoleEnum.TEACHER.name().equals(currentUser.getRole())) {
             question.setUserId(currentUser.getId());
         }
+
         PageHelper.startPage(pageNum, pageSize);
         List<Question> list = questionMapper.selectAll(question);
         return PageInfo.of(list);
