@@ -8,8 +8,12 @@ import com.example.utils.TokenUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import javax.annotation.Resource;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * 公告信息表业务处理
@@ -17,6 +21,7 @@ import java.util.List;
 @Service
 public class NoticeService {
 
+    private static final Logger log = LoggerFactory.getLogger(NoticeService.class);
     @Resource
     private NoticeMapper noticeMapper;
 
@@ -70,7 +75,20 @@ public class NoticeService {
     /**
      * 分页查询
      */
-    public PageInfo<Notice> selectPage(Notice notice, Integer pageNum, Integer pageSize) {
+    public PageInfo<Notice> selectPage(Notice notice, Integer pageNum, Integer pageSize,Integer userId) {
+        Account currentUser = TokenUtils.getCurrentUser();
+        String cRole = currentUser.getRole();
+
+        if (Objects.equals(cRole, "TEACHER")) {
+            System.out.println("this user is"+userId);
+                System.out.println("username!!!!!!::" + currentUser.getUsername());
+
+
+            notice.setUser(String.valueOf(currentUser.getUsername()));
+        }else {
+            notice.setUser(null);
+
+        }
         PageHelper.startPage(pageNum, pageSize);
         List<Notice> list = noticeMapper.selectAll(notice);
         return PageInfo.of(list);

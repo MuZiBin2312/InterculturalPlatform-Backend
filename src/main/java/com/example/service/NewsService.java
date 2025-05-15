@@ -94,7 +94,7 @@ public class NewsService {
         }
         String cRole = currentUser.getRole();
         if (Objects.equals(cRole, "TEACHER")) {
-            System.out.println("userid!!!!!!::" + currentUser.getRole());
+//            System.out.println("userid!!!!!!::" + currentUser.getRole());
 
             news.setUserId(userId);
         }else {
