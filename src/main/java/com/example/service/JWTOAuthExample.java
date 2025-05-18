@@ -32,10 +32,10 @@ public class JWTOAuthExample {
 
         String cozeAPIBase = "api.coze.cn";
 
-        // ✅ 2. 填写你的 OAuth 应用信息（从 Coze 开发者平台获取）
-        String jwtOauthClientID = "1114586840596";  // <-- 替换为你的实际 client_id
-        String jwtOauthPublicKeyID = "5VCjKuGWMd9gF7VYzsQ8lub1akIYRRe8YIDikZI4ToU";  // <-- 替换为你的实际 public key ID
-        String jwtOauthPrivateKeyFilePath = "src/main/java/com/example/OAuthkey.pem";  // <-- 替换为你的私钥文件路径
+        // ✅ 2. 填写 OAuth 应用信息（从 Coze 开发者平台获取）
+        String jwtOauthClientID = "1114586840596";  // <-- 实际 client_id
+        String jwtOauthPublicKeyID = "5VCjKuGWMd9gF7VYzsQ8lub1akIYRRe8YIDikZI4ToU";  // <-- 实际 public key ID
+        String jwtOauthPrivateKeyFilePath = "src/main/java/com/example/OAuthkey.pem";  // <-- 私钥文件路径
         String jwtOauthPrivateKey = null;
         try {
             jwtOauthPrivateKey = new String(

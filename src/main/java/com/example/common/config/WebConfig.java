@@ -22,7 +22,7 @@ public class WebConfig implements  WebMvcConfigurer {
                 .excludePathPatterns("/files/**")
                 .excludePathPatterns(
                         "/api/refresh-token", // ✅ 放行刷新token的接口
-                        "/api/login",         // ✅ 还有登录接口也别拦（根据你的实际情况）
+                        "/api/login",         // ✅ 登录/注册
                         "/api/call-coze"       // ✅ 如果有注册接口，也别拦
 
                 )
