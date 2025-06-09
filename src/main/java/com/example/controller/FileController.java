@@ -14,6 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.OutputStream;
 import java.net.URLEncoder;
 import java.util.List;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.util.Enumeration;
 
 /**
  * 文件接口
@@ -21,13 +24,31 @@ import java.util.List;
 @RestController
 @RequestMapping("/files")
 public class FileController {
+    public static String getLocalIp() {
+        try {
+            Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces();
+            while (interfaces.hasMoreElements()) {
+                NetworkInterface ni = interfaces.nextElement();
+                Enumeration<InetAddress> addresses = ni.getInetAddresses();
+                while (addresses.hasMoreElements()) {
+                    InetAddress addr = addresses.nextElement();
+                    if (!addr.isLoopbackAddress() && addr.isSiteLocalAddress()) {
+                        return addr.getHostAddress();
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "127.0.0.1";
+    }
+
 
     // 文件上传存储路径
     private static final String filePath = System.getProperty("user.dir") + "/files/";
 
     @Value("${server.port:9090}")
     private String port;
-
     @Value("${ip:localhost}")
     private String ip;
 
@@ -46,17 +67,16 @@ public class FileController {
             if (!FileUtil.isDirectory(filePath)) {
                 FileUtil.mkdir(filePath);
             }
-            // 文件存储形式：时间戳-文件名
-            FileUtil.writeBytes(file.getBytes(), filePath + flag + "-" + fileName);  // ***/manager/files/1697438073596-avatar.png
+            FileUtil.writeBytes(file.getBytes(), filePath + flag + "-" + fileName);
             System.out.println(fileName + "--上传成功");
 
         } catch (Exception e) {
             System.err.println(fileName + "--文件上传失败");
         }
+        String ip = getLocalIp();  // 获取真实IP
         String http = "http://" + ip + ":" + port + "/files/";
-        return Result.success(http + flag + "-" + fileName);  //  http://localhost:9090/files/1697438073596-avatar.png
+        return Result.success(http + flag + "-" + fileName);
     }
-
 
     /**
      * 获取文件

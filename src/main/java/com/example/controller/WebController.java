@@ -121,8 +121,8 @@ public class WebController {
     public Result selectLine() {
         List<Answer> answerList = answerService.selectAll(null);
         Date date = new Date();
-        DateTime start = DateUtil.offsetDay(date, -8);
-        DateTime end = DateUtil.offsetDay(date, -1);
+        DateTime start = DateUtil.offsetDay(date, -6);
+        DateTime end = DateUtil.offsetDay(date, 0);
         List<String> dateList = DateUtil.rangeToList(start, end, DateField.DAY_OF_YEAR).stream()
                 .map(DateUtil::formatDate).sorted(Comparator.naturalOrder()).collect(Collectors.toList());
         List<Dict> list = new ArrayList<>();
@@ -166,7 +166,7 @@ public class WebController {
         List<Video> videoList = videoService.selectAll(null);
 
         Date date = new Date();
-        DateTime start = DateUtil.offsetDay(date, -9); // 含今天，近10天
+        DateTime start = DateUtil.offsetDay(date, -6); // 含今天，近10天
         DateTime end = DateUtil.offsetDay(date, 0);
 
         List<String> dateList = DateUtil.rangeToList(start, end, DateField.DAY_OF_YEAR).stream()

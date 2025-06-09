@@ -16,13 +16,19 @@ public class CorsConfig {
     public CorsFilter corsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration corsConfiguration = new CorsConfiguration();
-
-        // 允许本地开发地址和外网地址
+        corsConfiguration.addAllowedOrigin("http://localhost:8080");
+        corsConfiguration.addAllowedOrigin("http://192.168.3.106:8080");
+        System.out.println("corsConfiguration: " + corsConfiguration);
+//        // 允许本地开发地址和外网地址
         corsConfiguration.addAllowedOrigin("http://192.168.18.15:8080");  // 本地开发地址
         corsConfiguration.addAllowedOrigin("http://192.168.18.15:8081");  // 本地开发地址
-
+        corsConfiguration.addAllowedOrigin("http://192.168.3.1:9090");  // 本地开发地址
+        corsConfiguration.addAllowedOrigin("http://192.168.3.1:8080");  // 本地开发地址
         corsConfiguration.addAllowedOrigin("http://localhost:8080");  // 本地开发地址
         corsConfiguration.addAllowedOrigin("https://550295mjyq84.vicp.fun");  // 外网地址
+        corsConfiguration.addAllowedOrigin("http://192.168.3.9:9090");  // yyc
+        corsConfiguration.addAllowedOrigin("http://192.168.3.9:8080");  // yyc
+
 
 
         // 允许所有的请求头
